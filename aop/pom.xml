@@ -35,8 +35,9 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.14.0</version>
+                <version>1.15.0</version>
                 <configuration>
+                    <!-- parece que no se banca mas arriba de 16 (mayo 2024) -->
                     <complianceLevel>16</complianceLevel>
                     <source>16</source>
                     <target>16</target>

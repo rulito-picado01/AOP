@@ -2,13 +2,34 @@
 
 Una alternativa para modularizar las incumbencias transversales (cross-cutting concerns).
 
-- Dentro del módulo `aop`:
-    - `mvn clean compile` y luego,
-    - `mvn exec:java`
+- Supongamos que modelamos una clase `Jugador`, una `Dirigente` y otra `Arbitro`. Tanto jugador como dirigente entienden
+  el mensaje `insultarA(unArbitro, unInsulto)` que permite insultar a un árbitro.
+- Luego nos agregan que cuando un jugador o un dirigente insulte quede persistido para generar un registro histórico.
+- Y luego cuando un técnico insulte se registre también. Unos meses despues nos piden agregar la fecha del insulto y
+  quien insulto, lo cual implica modificar en varios lugares.
+- Al resolver estos requerimientos si revisamos nuestra solución podemos notar que hay dos concerns independientes que
+  estamos combinando en las mismas abstracciones: el problema funcional (el futbol) y el problema de la registración.
+- Cuando diseñamos la solución, modelamos naturalmente una jerarquía de clases orientada a representar el dominio
+  funcional en cuestión, en este caso el fútbol. Existen sin embargo una serie de **incumbencias transversales** (
+  crosscutting concerts) a dicho modelo, como lo es el logging/registracón, que obligan a que las clases dedicadas a
+  resolver cuestiones funcionales tengan que preocuparse también por cómo almacenar un mensaje en una base de datos. Los
+  ejemplos de crosscutting concerns son requerimientos no funcionales típicos como seguridad, transaccionabilidad,
+  performance y logging. La implementación de crosscutting concerns provoca entonces dos características no deseables en
+  el código fuente:
+    - Code Scattering: El código correspondiente a una incumbencia, la registración en el ejemplo, no es encapsulado en
+      un único módulo/clase, sino que aparece disperso por el programa (en Tecnico, Jugador, Dirigente, etc). Duplicando
+      estas invocaciones a la registración hace que donde deba agregar un parámetro requiera de múltiples cambios.
+    - Code Tangling: Dentro de un mismo módulo/clase encontramos código correspondiente a distintos concerns.
+      En el ejemplo encontramos código que atañe al comportamiento funcional y código que corresponde al
+      logging. Una clase se ve impactada por razones diferentes, lo que hace más compleja el manteniemiento.
 
 Dos conceptos fundamentales que introduce la nueva disciplina son las nociones de
 joinpoints: puntos en la ejecución de un programa, definidos en función de elementos sintácticos.
 pointcuts: conjuntos de joinpoints que permitirán luego especificar dónde corresponde aplicar un determinado aspecto.
 
-Fuente: Ejemplo obtenido de la tesis de licenciatura de Altman y Cyment llamada: "SetPoint - Un enfoque semántico para
-la resolución de pointcuts".
+- Dentro del módulo `aop`:
+    - `mvn clean compile` y luego,
+    - `mvn exec:java`
+
+Fuente: Explicación obtenida de la tesis de licenciatura de Rubén Altman y Alan Cyment llamada: "SetPoint - Un enfoque
+semántico para la resolución de pointcuts".
