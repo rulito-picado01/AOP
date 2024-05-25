@@ -1,15 +1,18 @@
-package unrn.aop;
+package aop;
 
-public class Dirigente {
-
+public class Jugador {
     private String nombre;
 
-    public Dirigente(String nombre) {
+    public Jugador(String nombre) {
         this.nombre = nombre;
     }
 
+    @Registrar
     public void insultarA(Arbitro unArbitro, String insulto) {
-        //Ingresa a campo de juego y luego:
         unArbitro.escuchar(insulto);
+    }
+
+    public String nombre() {
+        return nombre;
     }
 }

@@ -1,4 +1,4 @@
-package unrn.aop;
+package aop;
 
 public class Arbitro {
     private String nombre;
