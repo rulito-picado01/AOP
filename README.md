@@ -42,7 +42,7 @@ Una alternativa para modularizar las incumbencias transversales (cross-cutting c
   en los Sujetos es una forma de scattering también.
 - **Solución usando AOP**:
     - Su objetivo es modularizar las incumbencias transversales en una unidad de modularización llamada *
-      *Aspecto**.
+      **Aspecto**.
     - Suponiendo que en el aspecto defino la registración, ¿cómo le indico desde que lugar debe invocarse sin
       generar
       tangling ni scattering?
@@ -60,7 +60,7 @@ Una alternativa para modularizar las incumbencias transversales (cross-cutting c
       aspecto.
     - **Advise**: Se denomina Advise al código a ejecutar para un Pointcut en particular.
         - Veamos entonces el módulo con la implementación utilizando aspectos.
-          ```
+          ```java
           @Aspect  //Registración es el Aspect
           public class Registracion {
            //JoinPoint es la ejecución del método insultarA y mediante la siguiente anotación
@@ -73,6 +73,7 @@ Una alternativa para modularizar las incumbencias transversales (cross-cutting c
                      
                // proceso con la registración ...
             }
+          }
           ```
 
 Necesitamos compilar con maven para que aplique el weaving y luego lo ejecutamos tambien con maven desde consola:
