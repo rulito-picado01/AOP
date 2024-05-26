@@ -34,46 +34,49 @@ Una alternativa para modularizar las incumbencias transversales (cross-cutting c
   encapsulamos la registración en un decorador. Pero el proceso de consutrucción es quien debe ser conciente de la
   necesidad de crear este decorador (scattering en la construcción). Por cada jerarquía diferente a la de personas del
   futbol voy a tener que generar un decorador de este tipo reapareciendo el scattering.
-    - **Solución 3**: ¿Y si aplicamos **Observer**? Veamos la solución en el módulo observer. Nuevamente mejoramos el
-      tangling porque encapsulamos la registración en el observer. Aunque la notificacion que se realiza en
-      PersonaDelFutbol
-      sigue siendo una forma de mezclar concens differentes. Por otro lado, la subscripcion del Observer con la
-      registración
-      en los Sujetos es una forma de scattering también.
-    - **Solución usando AOP**:
-        - Su objetivo es modularizar las incumbencias transversales en una unidad de modularización llamada *
-          *Aspecto**.
-        - Suponiendo que en el aspecto defino la registración, ¿cómo le indico desde que lugar debe invocarse sin
-          generar
-          tangling ni scattering?
-        - Para esto es necesario definir cierto *puntos* en la ejecución del programa donde queremos que las
-          incumbencias
-          encapsultadas en el aspecto se invoquen.
-        - Esto puntos son conocidos como **Join Points**: puntos en la ejecución de un programa, definidos en
-          función de
-          elementos sintácticos (llamados a métodos, retornos, lanzamientos de exceptions, etc).
-        - ¿Quién realiza este proceso de entremezclado? Una extensión al compilador denominado **Weaving** (
-          costura).
-        - En el caso de Java necesitamos AspectJ (extiende el compilador de Java agregando el weaving).
-        - **Pointcuts**: conjuntos de Join Points que permitirán luego especificar dónde corresponde aplicar un
-          determinado
-          aspecto.
-        - **Advise**: Se denomina Advise al código a ejecutar para un Pointcut en particular.
-            - Veamos entonces el módulo con la implementación utilizando aspectos.
-              ```
-              @Aspect  //Registración es el Aspect
-              public class Registracion {
-               //JoinPoint es la ejecución del método insultarA y mediante la siguiente anotación
-               //defino el PointCut.
-                @Before("execution(* aop.Jugador.insultarA(..))") 
-                public void registrarAntes(JoinPoint joinPoint) {
-                   Jugador unJugador = (Jugador) joinPoint.getThis();
-                   Arbitro unArbitro = (Arbitro) joinPoint.getArgs()[0];
-                   String insulto = (String) joinPoint.getArgs()[1];
-                   
-                   // proceso con la registración ...
-                }
-              ```
+- **Solución 3**: ¿Y si aplicamos **Observer**? Veamos la solución en el módulo observer. Nuevamente mejoramos el
+  tangling porque encapsulamos la registración en el observer. Aunque la notificacion que se realiza en
+  PersonaDelFutbol
+  sigue siendo una forma de mezclar concens differentes. Por otro lado, la subscripcion del Observer con la
+  registración
+  en los Sujetos es una forma de scattering también.
+- **Solución usando AOP**:
+    - Su objetivo es modularizar las incumbencias transversales en una unidad de modularización llamada *
+      *Aspecto**.
+    - Suponiendo que en el aspecto defino la registración, ¿cómo le indico desde que lugar debe invocarse sin
+      generar
+      tangling ni scattering?
+    - Para esto es necesario definir cierto *puntos* en la ejecución del programa donde queremos que las
+      incumbencias
+      encapsultadas en el aspecto se invoquen.
+    - Esto puntos son conocidos como **Join Points**: puntos en la ejecución de un programa, definidos en
+      función de
+      elementos sintácticos (llamados a métodos, retornos, lanzamientos de exceptions, etc).
+    - ¿Quién realiza este proceso de entremezclado? Una extensión al compilador denominado **Weaving** (
+      costura).
+    - En el caso de Java necesitamos AspectJ (extiende el compilador de Java agregando el weaving).
+    - **Pointcuts**: conjuntos de Join Points que permitirán luego especificar dónde corresponde aplicar un
+      determinado
+      aspecto.
+    - **Advise**: Se denomina Advise al código a ejecutar para un Pointcut en particular.
+        - Veamos entonces el módulo con la implementación utilizando aspectos.
+          ```
+          @Aspect  //Registración es el Aspect
+          public class Registracion {
+           //JoinPoint es la ejecución del método insultarA y mediante la siguiente anotación
+           //defino el PointCut.
+            @Before("execution(* aop.Jugador.insultarA(..))") 
+            public void registrarAntes(JoinPoint joinPoint) {
+               Jugador unJugador = (Jugador) joinPoint.getThis();
+               Arbitro unArbitro = (Arbitro) joinPoint.getArgs()[0];
+               String insulto = (String) joinPoint.getArgs()[1];
+                     
+               // proceso con la registración ...
+            }
+          ```
+
+Necesitamos compilar con maven para que aplique el weaving y luego lo ejecutamos tambien con maven desde consola:
+
 - Dentro del módulo `aop`:
     - `mvn clean compile` y luego,
     - `mvn exec:java`
