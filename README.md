@@ -61,10 +61,10 @@ Una alternativa para modularizar las incumbencias transversales (cross-cutting c
     - **Advise**: Se denomina Advise al código a ejecutar para un Pointcut en particular.
         - Veamos entonces el módulo con la implementación utilizando aspectos.
           ```java
-          @Aspect  //Registración es el Aspect
+          @Aspect  //Registración es el Aspecto
           public class Registracion {
-           //JoinPoint es la ejecución del método insultarA y mediante la siguiente anotación
-           //defino el PointCut.
+           //JoinPoint es la ejecución del método insultarA 
+           //y mediante la siguiente anotación defino el PointCut.
             @Before("execution(* aop.Jugador.insultarA(..))") 
             public void registrarAntes(JoinPoint joinPoint) {
                Jugador unJugador = (Jugador) joinPoint.getThis();
