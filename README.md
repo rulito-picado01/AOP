@@ -37,12 +37,11 @@ Una alternativa para modularizar las incumbencias transversales (cross-cutting c
 - **Solución 3**: ¿Y si aplicamos **Observer**? Veamos la solución en el módulo observer. Nuevamente mejoramos el
   tangling porque encapsulamos la registración en el observer. Aunque la notificacion que se realiza en
   PersonaDelFutbol
-  sigue siendo una forma de mezclar concens differentes. Por otro lado, la subscripcion del Observer con la
+  sigue siendo una forma de mezclar concerns differentes. Por otro lado, la subscripcion del Observer con la
   registración
   en los Sujetos es una forma de scattering también.
 - **Solución usando AOP**:
-    - Su objetivo es modularizar las incumbencias transversales en una unidad de modularización llamada *
-      **Aspecto**.
+    - Su objetivo es modularizar las incumbencias transversales en una unidad de modularización llamada **Aspecto**.
     - Suponiendo que en el aspecto defino la registración, ¿cómo le indico desde que lugar debe invocarse sin
       generar
       tangling ni scattering?
