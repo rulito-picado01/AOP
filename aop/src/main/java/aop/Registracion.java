@@ -7,8 +7,8 @@ import org.aspectj.lang.annotation.Before;
 
 @Aspect
 public class Registracion {
-    @Before("execution(* aop.Jugador.insultarA(..))")
-    //@Before("execution(@Registrar * *(..))")
+    //@Before("execution(* aop.Jugador.insultarA(..))")
+    @Before("execution(@RegistrarInsulto * *(..))")
     public void registrarAntes(JoinPoint joinPoint) {
         Jugador unJugador = (Jugador) joinPoint.getThis();
         Arbitro unArbitro = (Arbitro) joinPoint.getArgs()[0];

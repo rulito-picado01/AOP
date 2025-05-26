@@ -7,7 +7,7 @@ public class Jugador {
         this.nombre = nombre;
     }
 
-    //@Registrar
+    @RegistrarInsulto
     public void insultarA(Arbitro unArbitro, String insulto) {
         unArbitro.escuchar(insulto);
     }
