@@ -10,6 +10,6 @@ public class Dirigente {
 
     public void insultarA(Arbitro unArbitro, String insulto) {
         //Ingresa a campo de juego y luego:
-        unArbitro.escuchar(insulto);
+        unArbitro.escucharInsulto(insulto);
     }
 }

@@ -1,0 +1,7 @@
+- Aplico Decorador. Tengo que unificar el mensaje primero.
+- Ahora al agregar parámetros en la registración, solo cambio en un lugar. Mucho mejor!
+- Pero me queda la construcción del decorador como scattering.
+- Y si necesito decorar otra jerarquia que no es PersonaDelFutbol?
+-- Ejemplo, Entrenador o Técnico que habla con su ayudante para decidir cambios.
+--- También quiero registrar lo que se dicen. No encaja dirigirmeA(Arbitro)...
+--- Reaparece el scattring.

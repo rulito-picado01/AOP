@@ -10,9 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>aop</module>
-        <module>herencia</module>
-        <module>decorador</module>
-        <module>observer</module>
+        <module>futbol</module>
     </modules>
 
     <properties>

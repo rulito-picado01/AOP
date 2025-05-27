@@ -1,4 +1,4 @@
-package aop;
+package iteracion1;
 
 public class Arbitro {
     private String nombre;
