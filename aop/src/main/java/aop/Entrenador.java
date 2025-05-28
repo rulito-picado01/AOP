@@ -8,6 +8,7 @@ public class Entrenador {
     }
 
     //...
+    //@Registrar
     public void dialogarCon(AyudanteDeCampo unAyudanteDeCampo, String mensaje) {
         unAyudanteDeCampo.escucharMensaje(mensaje);
         //this.registro.registar(mensaje);

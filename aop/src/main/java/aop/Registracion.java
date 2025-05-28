@@ -3,6 +3,7 @@ package aop;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 
@@ -10,8 +11,8 @@ import java.lang.reflect.Method;
 
 @Aspect
 public class Registracion {
-    @Before("execution(* aop..*.insultarA(..)) || execution(* aop..*.dialogarCon(..))")
-    //@Before("execution(@RegistrarInsulto * *(..))")
+    //@Before("execution(* aop..*.insultarA(..)) || execution(* aop..*.dialogarCon(..))")
+    //@Before("execution(@Registrar * *(..))")
     public void registrarAntes(JoinPoint joinPoint) {
         String mensaje = (String) joinPoint.getArgs()[1];
         System.out.println("Registrando: " + mensaje);
@@ -28,13 +29,13 @@ public class Registracion {
 //        System.out.println("Registrando: " + nombre + " - " + mensaje);
 
 
-    //@After("execution(* aop.Jugador.insultarA(..))")
+    //@After("execution(* aop..*.insultarA(..)) || execution(* aop..*.dialogarCon(..))")
     public void registrarDespues(JoinPoint joinPoint) {
         String mensaje = (String) joinPoint.getArgs()[1];
         System.out.println("Registrando: " + mensaje);
     }
 
-    //@Around("execution(* aop.Jugador.insultarA(..))")
+    @Around("execution(* aop..*.insultarA(..)) || execution(* aop..*.dialogarCon(..))")
     public void registrarEntre(ProceedingJoinPoint joinPoint) throws Throwable {
         String mensaje = (String) joinPoint.getArgs()[1];
         System.out.println("Antes de la invocación: " + mensaje);

@@ -8,6 +8,7 @@ public class Dirigente {
         this.nombre = nombre;
     }
 
+    //@Registrar
     public void insultarA(Arbitro unArbitro, String insulto) {
         //Ingresa a campo de juego y luego:
         unArbitro.escucharInsulto(insulto);
